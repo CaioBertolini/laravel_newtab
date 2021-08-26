@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Candidatura;
 use App\Http\Controllers\Pessoa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,3 +19,4 @@ use App\Http\Controllers\Vaga;
 
 Route::post('/v1/vagas',[Vaga::class,'store'])->name('vagas_cadastro');
 Route::post('/v1/pessoas',[Pessoa::class,'store'])->name('pessoas_cadastro');
+Route::post('/v1/candidaturas',[Candidatura::class,'store'])->name('candidatura_cadastro');

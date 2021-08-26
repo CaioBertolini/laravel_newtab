@@ -41,13 +41,21 @@
     <body>
         <a href="/">Voltar para página inicial</a>
         <h1>Cadastrar Candidatura</h1>
-        <form action="" method="POST">
+        <form action="{{ route('candidatura_cadastro') }}" method="POST">
             @csrf
             <select name="id_vaga" required>
-                <option value=1>Teste vaga</option>
+                <?php
+                    foreach ($vagas as $vaga){
+                        echo "<option value=".$vaga->id.">".$vaga->empresa."</option>";
+                    }
+                ?>
             </select>
             <select name="id_pessoa" required>
-                <option value=1>Teste pessoa</option>
+                <?php
+                    foreach ($pessoas as $pessoa){
+                        echo "<option value=".$pessoa->id.">".$pessoa->name."</option>";
+                    }
+                ?>
             </select>
             <input type="submit" value="Cadastrar">
         </form>

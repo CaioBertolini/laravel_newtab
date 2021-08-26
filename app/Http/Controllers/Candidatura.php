@@ -26,8 +26,8 @@ class Candidatura extends Controller
      */
     public function create()
     {
-        $vagas = Vagas::select('select * from vagas');
-        $pessoas = Pessoas::select('select * from pessoas');
+        $vagas = Vagas::all();
+        $pessoas = Pessoas::all();
         return view('candidaturas.cadastro', ['vagas' => $vagas, 'pessoas' => $pessoas]);
     }
 
@@ -39,7 +39,17 @@ class Candidatura extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_vaga' => 'required',
+            'id_pessoa' => 'required',
+        ]);
+        
+        Candidaturas::create([
+            "id_vaga" => $request->id_vaga,
+            "id_pessoa" => $request->id_pessoa,
+        ]);
+        
+        return redirect('/');
     }
 
     /**
