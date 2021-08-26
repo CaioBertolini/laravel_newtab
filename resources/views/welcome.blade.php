@@ -38,7 +38,7 @@
         <div class="botoes">
             <a href="/v1/vagas/cadastro">Cadastrar Vaga</a>
             <a href="/v1/pessoas/cadastro">Cadastrar Candidato</a>
-            <a href="">Cadastrar Candidatura</a>
+            <a href="/v1/candidatura/cadastro">Cadastrar Candidatura</a>
             <a href="">Ver lista de Candidaturas</a>
         </div>
     </body>

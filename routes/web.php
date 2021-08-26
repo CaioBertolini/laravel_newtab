@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Candidatura;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vaga;
 use App\Http\Controllers\Pessoa;
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::get('/v1/vagas/cadastro', [Vaga::class, 'create']);
 Route::get('/v1/pessoas/cadastro', [Pessoa::class, 'create']);
+Route::get('/v1/candidatura/cadastro', [Candidatura::class, 'create']);

@@ -23,6 +23,9 @@
             input {
                 margin-bottom: 10px;
             }
+            select {
+                margin-bottom: 10px;
+            }
             textarea {
                 margin-bottom: 10px;
             }
@@ -48,8 +51,21 @@
             @csrf
             <input type="text" name="empresa" placeholder="Empresa" required>
             <input type="text" name="titulo" placeholder="Título" required>
-            <input type="text" name="localizacao" placeholder="Localização" required>
-            <input type="number" name="nivel" placeholder="Nível" required>
+            <select name="localizacao" required>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+            </select>
+            <select name="nivel" required>
+                <option value=1>Estagiário</option>
+                <option value=2>Júnior</option>
+                <option value=3>Pleno</option>
+                <option value=4>Sênior</option>
+                <option value=5>Especialista</option>
+            </select>
             <textarea name="descricao" cols="30" rows="10" placeholder="Descrição" required></textarea>
             <input type="submit" value="Cadastrar">
         </form>

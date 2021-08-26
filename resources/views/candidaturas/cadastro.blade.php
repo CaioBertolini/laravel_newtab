@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Cadastro de Candidatos</title>
+        <title>Cadastro de Candidaturas</title>
 
         <style>
             body {
@@ -19,9 +19,6 @@
                 display: flex;
                 flex-direction: column;
                 width: 40%;
-            }
-            input {
-                margin-bottom: 10px;
             }
             select {
                 margin-bottom: 10px;
@@ -43,25 +40,14 @@
     </head>
     <body>
         <a href="/">Voltar para página inicial</a>
-        <h1>Cadastrar Candidato</h1>
-        <form action="{{ route('pessoas_cadastro') }}" method="POST">
+        <h1>Cadastrar Candidatura</h1>
+        <form action="" method="POST">
             @csrf
-            <input type="text" name="name" placeholder="Nome" required>
-            <input type="text" name="profissao" placeholder="Profissão" required>
-            <select name="localizacao" required>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="E">E</option>
-                <option value="F">F</option>
+            <select name="id_vaga" required>
+                <option value=1>Teste vaga</option>
             </select>
-            <select name="nivel" required>
-                <option value=1>Estagiário</option>
-                <option value=2>Júnior</option>
-                <option value=3>Pleno</option>
-                <option value=4>Sênior</option>
-                <option value=5>Especialista</option>
+            <select name="id_pessoa" required>
+                <option value=1>Teste pessoa</option>
             </select>
             <input type="submit" value="Cadastrar">
         </form>
