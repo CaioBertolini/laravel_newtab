@@ -23,3 +23,4 @@ Route::get('/', function () {
 Route::get('/v1/vagas/cadastro', [Vaga::class, 'create']);
 Route::get('/v1/pessoas/cadastro', [Pessoa::class, 'create']);
 Route::get('/v1/candidatura/cadastro', [Candidatura::class, 'create']);
+Route::get('/v1/candidatura/mostrar', [Candidatura::class, 'show']);

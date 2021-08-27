@@ -58,9 +58,15 @@ class Candidatura extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $candidaturas = Candidaturas::select('id_vaga')->distinct()->get();
+        $vagas_id = [];
+        foreach ($candidaturas as $candidatura){
+            array_push($vagas_id, $candidatura->id_vaga);
+        }
+        $vagas = Vagas::find($vagas_id);
+        return view('candidaturas.mostrar', ['vagas'=> $vagas]);
     }
 
     /**
