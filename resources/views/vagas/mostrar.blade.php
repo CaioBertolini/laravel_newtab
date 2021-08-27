@@ -50,6 +50,10 @@
                 color: white;
                 cursor: pointer;
             }
+            table {
+                margin: 20px;
+                width: 90%;
+            }
         </style>
 
     </head>
@@ -66,6 +70,24 @@
             </select>
             <button onclick="RedirectVaga()">Listar</a>
         </div>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Profissão</th>
+                <th>Localização</th>
+                <th>Nível</th>
+            </tr>
+            <?php
+                foreach ($candidatura_pessoa as $pessoa){
+                    echo "<tr>";
+                    echo "<td>".$pessoa->name."</td>";
+                    echo "<td>".$pessoa->profissao."</td>";
+                    echo "<td>".$pessoa->localizacao."</td>";
+                    echo "<td>".$pessoa->nivel."</td>";
+                    echo "</tr>";  
+                };  
+            ?>
+        </table>
     </body>
     <script>
         function RedirectVaga(){

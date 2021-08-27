@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vagas;
+use App\Models\Candidaturas;
+use App\Models\Pessoas;
 
 class Vaga extends Controller
 {
@@ -62,6 +64,37 @@ class Vaga extends Controller
     public function show($id)
     {
         //
+        function modulo($num){
+            if($num < 0){
+                return $num*(-1);
+             }else{
+                return $num;
+             }
+        }
+
+        // Candidaturas
+        $candidaturas = Candidaturas::select('id_vaga')->distinct()->get();
+        $vagas_id = [];
+        foreach ($candidaturas as $candidatura){
+            array_push($vagas_id, $candidatura->id_vaga);
+        }
+        $vagas = Vagas::find($vagas_id);
+
+        $candidatura_pessoa = Candidaturas::where('id_vaga',$id)
+            ->select('pessoas.*')
+            ->join('pessoas', 'pessoas.id', '=', 'candidaturas.id_pessoa')
+            ->get();
+
+        $vagas_candidatura = Vagas::find($id);
+
+        $loc_vaga = $vagas_candidatura->localizacao;
+        $niv_vaga = $vagas_candidatura->nivel;
+        
+        foreach ($candidatura_pessoa as $pessoa){
+             $N = 100 - 25 * modulo($niv_vaga - $pessoa->nivel);
+        }
+
+        return view('vagas.mostrar', ['candidatura_pessoa' => $candidatura_pessoa, 'vagas'=> $vagas]);
     }
 
     /**
