@@ -76,6 +76,7 @@
                 <th>Profissão</th>
                 <th>Localização</th>
                 <th>Nível</th>
+                <th>Score</th>
             </tr>
             <?php
                 foreach ($candidatura_pessoa as $pessoa){
@@ -84,6 +85,7 @@
                     echo "<td>".$pessoa->profissao."</td>";
                     echo "<td>".$pessoa->localizacao."</td>";
                     echo "<td>".$pessoa->nivel."</td>";
+                    echo "<td>".$pessoa->score."</td>";
                     echo "</tr>";  
                 };  
             ?>

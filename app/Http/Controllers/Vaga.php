@@ -63,14 +63,6 @@ class Vaga extends Controller
      */
     public function show($id)
     {
-        //
-        function modulo($num){
-            if($num < 0){
-                return $num*(-1);
-             }else{
-                return $num;
-             }
-        }
 
         // Candidaturas
         $candidaturas = Candidaturas::select('id_vaga')->distinct()->get();
@@ -81,18 +73,10 @@ class Vaga extends Controller
         $vagas = Vagas::find($vagas_id);
 
         $candidatura_pessoa = Candidaturas::where('id_vaga',$id)
-            ->select('pessoas.*')
+            ->select('pessoas.*','candidaturas.score')
             ->join('pessoas', 'pessoas.id', '=', 'candidaturas.id_pessoa')
+            ->orderByDesc('score')
             ->get();
-
-        $vagas_candidatura = Vagas::find($id);
-
-        $loc_vaga = $vagas_candidatura->localizacao;
-        $niv_vaga = $vagas_candidatura->nivel;
-        
-        foreach ($candidatura_pessoa as $pessoa){
-             $N = 100 - 25 * modulo($niv_vaga - $pessoa->nivel);
-        }
 
         return view('vagas.mostrar', ['candidatura_pessoa' => $candidatura_pessoa, 'vagas'=> $vagas]);
     }
