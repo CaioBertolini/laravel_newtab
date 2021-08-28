@@ -1,63 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Projeto Laravel - Newtab
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Teste técnico original: https://github.com/VAGAScom/desafio-tecnico/blob/master/desafio-tecnico.md 
 
-## About Laravel
+## Recrutando candidatos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Um recrutador precisa analisar as candidaturas recebidas para vagas de emprego. Dado o grande volume de candidaturas em algumas vagas, olhar um a um seria um trabalho muito demorado.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Seu papel aqui é ajudar o recrutador, indicando as pessoas mais aderentes para cada vaga. Para isso, crie uma aplicação web com API de acordo com as especificações a seguir.
+Especificações da API
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Considerações gerais:
 
-## Learning Laravel
+Níveis de experiência:
+    
+    1: estagiário
+    2: júnior
+    3: pleno
+    4: sênior
+    5: especialista
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Localidades: representadas por letras do alfabeto. Verificar no mapa abaixo os caminhos e distâncias entre as localidades.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<img src="https://raw.githubusercontent.com/VAGAS/desafio-tecnico/master/graph.png" alt="Mapa distâncias">
 
-## Laravel Sponsors
+Score do candidato: cada candidato deverá receber um score para cada candidatura que realizar. Esse score é definido com base no nível de experiência e localização em relação a vaga a qual se candidatou.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Cálculo do score do candidato:
 
-### Premium Partners
+O score do candidato é dado pela seguinte fórmula:
+score = (D + N) /2
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
+N é definido por:
+N = 100 - 25 * |NV - NC|
 
-## Contributing
+    onde:
+    NV é o nível de experiência esperado para a vaga
+    NC é o nível de experiência do candidato
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Para definir o valor de D, encontre a menor distância entre o candidato e a vaga e utilize este valor para consultar a tabela a seguir:
+    
+    Menor distância entre o candidato e a vaga	D
+    0 até 5	= 100
+    maiores que 5 até 10 = 75
+    maiores que 10 até 15 = 50
+    maiores que 15 até 20 = 25
+    maiores que 20	0
 
-## Code of Conduct
+Considere somente a parte inteira do score.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Não utilize bibliotecas para a realização do cálculo da distância.
 
-## Security Vulnerabilities
+## Endpoints
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Criar um endpoint para cadastrar vagas de emprego
 
-## License
+Request:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+POST http://localhost:9000/v1/vagas
+
+    Body:
+    {
+        "empresa": "Teste",
+        "titulo": "Vaga teste",
+        "descricao": "Criar os mais diferentes tipos de teste",
+        "localizacao": "A",
+        "nivel": 3
+    }
+
+Response:
+
+    O response para esta função será definido por você e faz parte da avaliação.
+
+2. Criar um endpoint para cadastrar pessoas
+
+Request:
+
+POST http://localhost:9000/v1/pessoas
+
+    Body:
+    {
+        "nome": "John Doe",
+        "profissao": "Engenheiro de Software",
+        "localizacao": "C",
+        "nivel": 2
+    }
+
+Response:
+
+    O response para esta função será definido por você e faz parte da avaliação.
+
+3. Registrar candidatura de uma pessoa em uma vaga
+
+Neste endpoint você deverá registar a candidatura do candidato para a vaga em questão.
+
+Request:
+
+POST http://localhost:9000/v1/candidaturas
+
+    Body:
+    {
+        "id_vaga": 1,
+        "id_pessoa": 2
+    }
+
+Response:
+
+    O response para esta função será definido por você e faz parte da avaliação.
+
+4. Criar um endpoint para retornar os candidatos de uma vaga, ordenados pelo score (de forma decrescente)
+
+GET: http://localhost:9000/v1/vagas/1/candidaturas/ranking
+
+    Response:
+    [
+        {
+            "nome": "Mary Jane",
+            "profissao": "Engenheira de Software",
+            "localizacao": "A",
+            "nivel": 4,
+            "score": 87
+        },
+        {
+            "nome": "John Doe",
+            "profissao": "Engenheiro de Software",
+            "localizacao": "C",
+            "nivel": 2,
+            "score": 62
+        },
+        ...
+    ]
