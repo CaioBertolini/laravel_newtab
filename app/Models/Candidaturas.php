@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Candidaturas extends Model
 {
     use HasFactory;
-    public $fillable = ['id_vaga','id_pessoa'];
+    public $fillable = ['id_vaga','id_pessoa','score'];
 }
