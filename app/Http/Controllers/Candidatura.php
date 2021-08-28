@@ -76,7 +76,7 @@ class Candidatura extends Controller
         $N = 100 - 25 * abs($niv);
 
         if ($loc_vaga == $loc_pessoa){
-            $D = 0;
+            $D = 100;
         } else {
             $letras_dist = [$loc_vaga,$loc_pessoa];
             sort($letras_dist);
